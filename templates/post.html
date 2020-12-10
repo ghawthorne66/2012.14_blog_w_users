@@ -1,3 +1,8 @@
+
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
 {% include "header.html" %}
 
   <!-- Page Header -->
@@ -25,10 +30,12 @@
         <div class="col-lg-8 col-md-10 mx-auto">
             {{ post.body|safe }}
           <hr>
-
+<!--           If user id is 1 then they can see the Edit Post button -->
+             {% if current_user.id == 1 %}
             <div class="clearfix">
             <a class="btn btn-primary float-right" href="{{url_for('edit_post', post_id=post.id)}}">Edit Post</a>
             </div>
+            {% endif %}
 
 
 
@@ -37,7 +44,7 @@
               <ul class="commentList">
                 <li>
                     <div class="commenterImage">
-                      <img src="https://pbs.twimg.com/profile_images/744849215675838464/IH0FNIXk.jpg"/>
+                      <img src="https://pbs.twimg.com/profile_images/744849215675838464/IH0FNIXk.jpg" alt="blog image"/>
                     </div>
                     <div class="commentText">
                       <p>Some comment</p>
@@ -55,3 +62,4 @@
 
   <hr>
 {% include "footer.html" %}
+{% endblock %}
